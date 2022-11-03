@@ -1,0 +1,84 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+
+    <div class="grid">
+
+      <div class="col-12">
+        <h1>Pessoas</h1>
+      </div>
+
+      <div class="col-12 p-fluid">
+        <label>Nome</label>
+        <input  pInputText type="text" name="nome"
+          [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="col-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="grid">
+    <div class="col-12">
+      <p-table styleClass="p-datatable-gridlines"
+        [value]="pessoas" [responsive]="true"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
+        <ng-template p-template="emptymessage">
+          <tr>
+            <td colspan="6">
+              Nenhuma pessoa encontrada
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-data-header">Nome</th>
+            <th class="col-data-header">Cidade</th>
+            <th class="col-data-header">Estado</th>
+            <th class="col-data-header">Status</th>
+            <th class="col-valor-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pessoa>
+          <tr>
+            <td>
+              <span class="p-column-title">Nome</span>
+              {{ pessoa.nome }}
+            </td>
+            <td>
+              <span class="p-column-title">Cidade</span>
+              {{ pessoa.endereco.cidade?.nome }}
+            </td>
+            <td>
+              <span class="p-column-title">Estado</span>
+              {{ pessoa.endereco.cidade?.estado.nome }}
+            </td>
+            <td>
+              <span class="p-column-title">Status</span>
+              <a class="p-column-ativo" routerLink="/pessoas" pTooltip="{{pessoa.ativo ? 'Desativar' : 'Ativar'}}"
+                tooltipPosition="top" (click)="mudarStatus(pessoa)">
+                {{ pessoa.ativo ? 'Ativo' : 'Inativo' }}
+              </a>
+            </td>
+            <td class="col-acoes">
+              <a pButton icon="pi pi-pencil"
+                pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/pessoas', pessoa.codigo]"></a>
+              <button pButton icon="pi pi-trash"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)='confirmarExclusao(pessoa)'></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="col-12">
+      <a pButton routerLink="/pessoas/nova">Nova Pessoa</a>
+    </div>
+  </div>
+</div>
