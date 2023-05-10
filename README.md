@@ -12,6 +12,8 @@ AlgaMoney é uma aplicação fullstack desenvolvida durante o curso Fullstack An
 A aplicação consiste em um cadastro de pessoas e lançamentos de receitas e despesas. É possível anexar um documento no lançamento, sendo salvo em um bucket no S3 da Amazon, e gerar relatórios em pdf de lançamentos em período estipulado. A aplicação também apresenta um dashboard com gráficos de lançamentos por categoria e por dia do mês corrente.
 A aplicação foi desenvolvida de forma responsiva, se adequando a qualquer tamanho de tela.
 
+A aplicação consome a [API REST](https://github.com/fabiosnascimento/algamoney-api-novo) Spring Boot desenvolvida no curso.
+
 ## Layout
 
 <img src=https://github.com/fabiosnascimento/assets/blob/master/Alga1.jpg width="800"/> <img src=https://github.com/fabiosnascimento/assets/blob/master/Alga3.jpg width="800"/>
